@@ -1,11 +1,26 @@
 import { create } from "zustand";
 import { nanoid } from "nanoid";
 
+// History state for undo/redo - only stores serializable data, not functions
+interface CanvasSnapshot {
+  shapes: Shape[];
+  selectedIds: string[];
+  tool: ToolType;
+  zoom: number;
+  panOffset: { x: number; y: number };
+  stageSize: { width: number; height: number };
+}
+
+interface HistoryState {
+  past: CanvasSnapshot[];
+  future: CanvasSnapshot[];
+}
+
 // Shape types that the canvas supports
-export type ShapeType = "rectangle" | "circle" | "line";
+export type ShapeType = "rectangle" | "circle" | "line" | "text" | "sticky" | "connector";
 
 // Tool types available in the toolbar
-export type ToolType = "select" | "rectangle" | "circle" | "line";
+export type ToolType = "select" | "rectangle" | "circle" | "line" | "text" | "sticky" | "connector";
 
 // Shape data structure - represents one object on canvas
 export interface Shape {
@@ -19,8 +34,25 @@ export interface Shape {
   stroke: string;
   strokeWidth: number;
   rotation: number;
-  // For lines specifically - end point coordinates
+  // For lines and connectors - start and end point coordinates
   points?: number[];
+  // For text and sticky notes - text content
+  text?: string;
+  // For text - font size
+  fontSize?: number;
+  // For text - font family
+  fontFamily?: string;
+  // For text - text color
+  textColor?: string;
+  // For text - text alignment
+  textAlign?: "left" | "center" | "right";
+  // For sticky notes - sticky note color
+  stickyColor?: string;
+  // For connectors - IDs of connected shapes
+  connectorStartId?: string;
+  connectorEndId?: string;
+  // For connectors - whether the connector is being created
+  isCreatingConnector?: boolean;
 }
 
 // Store state interface
@@ -43,6 +75,9 @@ interface CanvasState {
   // Stage size (canvas dimensions for calculations)
   stageSize: { width: number; height: number };
 
+  // History state (internal)
+  _history: HistoryState;
+
   // Actions
   setTool: (tool: ToolType) => void;
   setZoom: (zoom: number) => void;
@@ -59,7 +94,24 @@ interface CanvasState {
 
   // Utility
   getShapeById: (id: string) => Shape | undefined;
+
+  // Undo/Redo actions
+  undo: () => void;
+  redo: () => void;
+  canUndo: () => boolean;
+  canRedo: () => boolean;
+  saveToHistory: () => void;
 }
+
+// Create a shallow copy of state for history (excluding functions)
+const getStateForHistory = (state: CanvasState) => ({
+  shapes: state.shapes,
+  selectedIds: state.selectedIds,
+  tool: state.tool,
+  zoom: state.zoom,
+  panOffset: state.panOffset,
+  stageSize: state.stageSize,
+});
 
 export const useCanvasStore = create<CanvasState>((set, get) => ({
   // Initial state
@@ -69,6 +121,9 @@ export const useCanvasStore = create<CanvasState>((set, get) => ({
   zoom: 1,
   panOffset: { x: 0, y: 0 },
   stageSize: { width: 800, height: 600 },
+
+  // History state
+  _history: { past: [], future: [] } as HistoryState,
 
   // Tool actions
   setTool: (tool) => set({ tool }),
@@ -141,5 +196,60 @@ export const useCanvasStore = create<CanvasState>((set, get) => ({
 
   getShapeById: (id) => {
     return get().shapes.find((shape) => shape.id === id);
+  },
+
+  // Undo/Redo actions
+  saveToHistory: () => {
+    const state = get();
+    const history = state._history;
+    const newPast = [...history.past, getStateForHistory(state)];
+    // Limit history size to prevent memory issues
+    const limitedPast = newPast.slice(-50);
+    set((state) => ({
+      ...state,
+      _history: { ...history, past: limitedPast, future: [] },
+    }));
+  },
+
+  undo: () => {
+    const state = get();
+    const history = state._history;
+    if (history.past.length === 0) return;
+
+    const previousState = history.past[history.past.length - 1];
+    const newPast = history.past.slice(0, -1);
+    const newFuture = [getStateForHistory(state), ...history.future];
+
+    set((state) => ({
+      ...state,
+      ...previousState,
+      _history: { past: newPast, future: newFuture },
+    }));
+  },
+
+  redo: () => {
+    const state = get();
+    const history = state._history;
+    if (history.future.length === 0) return;
+
+    const nextState = history.future[0];
+    const newFuture = history.future.slice(1);
+    const newPast = [...history.past, getStateForHistory(state)];
+
+    set((state) => ({
+      ...state,
+      ...nextState,
+      _history: { past: newPast, future: newFuture },
+    }));
+  },
+
+  canUndo: () => {
+    const history = get()._history;
+    return history.past.length > 0;
+  },
+
+  canRedo: () => {
+    const history = get()._history;
+    return history.future.length > 0;
   },
 }));

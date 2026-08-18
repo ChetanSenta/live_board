@@ -3,6 +3,7 @@
 import Canvas from "@/components/Canvas";
 import Toolbar from "@/components/Toolbar";
 import ZoomControls from "@/components/ZoomControls";
+import PropertiesPanel from "@/components/PropertiesPanel";
 
 export default function Home() {
   return (
@@ -15,6 +16,9 @@ export default function Home() {
 
       {/* Zoom controls */}
       <ZoomControls />
+
+      {/* Properties panel */}
+      <PropertiesPanel />
     </main>
   );
 }

@@ -6,6 +6,11 @@ import {
   Square,
   Circle,
   Minus,
+  Type,
+  StickyNote,
+  Link2,
+  RotateCcw,
+  RotateCw,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -14,13 +19,45 @@ const tools = [
   { id: "rectangle" as const, label: "Rectangle", icon: Square },
   { id: "circle" as const, label: "Circle", icon: Circle },
   { id: "line" as const, label: "Line", icon: Minus },
+  { id: "text" as const, label: "Text", icon: Type },
+  { id: "sticky" as const, label: "Sticky Note", icon: StickyNote },
+  { id: "connector" as const, label: "Connector", icon: Link2 },
 ];
 
 export default function Toolbar() {
-  const { tool, setTool, deleteSelected, selectedIds } = useCanvasStore();
+  const { tool, setTool, deleteSelected, selectedIds, undo, redo, canUndo, canRedo } = useCanvasStore();
 
   return (
     <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-white rounded-xl shadow-lg px-2 py-1.5 flex items-center gap-1 z-10">
+      {/* Undo/Redo buttons */}
+      <button
+        onClick={undo}
+        disabled={!canUndo()}
+        className={cn(
+          "p-2.5 rounded-lg transition-all duration-150",
+          "hover:bg-neutral-100 active:scale-95",
+          canUndo() ? "text-neutral-700" : "text-neutral-300 cursor-not-allowed"
+        )}
+        title="Undo (Ctrl+Z)"
+      >
+        <RotateCcw className="w-5 h-5" />
+      </button>
+      <button
+        onClick={redo}
+        disabled={!canRedo()}
+        className={cn(
+          "p-2.5 rounded-lg transition-all duration-150",
+          "hover:bg-neutral-100 active:scale-95",
+          canRedo() ? "text-neutral-700" : "text-neutral-300 cursor-not-allowed"
+        )}
+        title="Redo (Ctrl+Y)"
+      >
+        <RotateCw className="w-5 h-5" />
+      </button>
+
+      {/* Divider */}
+      <div className="w-px h-6 bg-neutral-200 mx-1" />
+
       {tools.map((t) => {
         const Icon = t.icon;
         const isActive = tool === t.id;
