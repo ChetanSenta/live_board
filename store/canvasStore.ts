@@ -53,6 +53,8 @@ export interface Shape {
   connectorEndId?: string;
   // For connectors - whether the connector is being created
   isCreatingConnector?: boolean;
+  // Opacity (0-1)
+  opacity?: number;
 }
 
 // Store state interface

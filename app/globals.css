@@ -4,6 +4,21 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Excalidraw-inspired theme */
+:root {
+  --primary: #6965DB;
+  --primary-hover: #5a57c4;
+  --primary-light: #E0DFFF;
+  --surface: #FFFFFF;
+  --surface-hover: #F5F5F5;
+  --border: #E5E5E5;
+  --text-primary: #1E1E1E;
+  --text-secondary: #868E96;
+  --canvas-bg: #FFFFFF;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -49,72 +64,72 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --background: #FFFFFF;
+  --foreground: #1E1E1E;
+  --card: #FFFFFF;
+  --card-foreground: #1E1E1E;
+  --popover: #FFFFFF;
+  --popover-foreground: #1E1E1E;
+  --primary: #6965DB;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F5F5F5;
+  --secondary-foreground: #1E1E1E;
+  --muted: #F5F5F5;
+  --muted-foreground: #868E96;
+  --accent: #E0DFFF;
+  --accent-foreground: #6965DB;
+  --destructive: #E03131;
+  --border: #E5E5E5;
+  --input: #E5E5E5;
+  --ring: #6965DB;
+  --chart-1: #6965DB;
+  --chart-2: #6965DB;
+  --chart-3: #6965DB;
+  --chart-4: #6965DB;
+  --chart-5: #6965DB;
+  --radius: 0.75rem;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #1E1E1E;
+  --sidebar-primary: #6965DB;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F5F5F5;
+  --sidebar-accent-foreground: #1E1E1E;
+  --sidebar-border: #E5E5E5;
+  --sidebar-ring: #6965DB;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: #1E1E1E;
+  --foreground: #FFFFFF;
+  --card: #2C2C2C;
+  --card-foreground: #FFFFFF;
+  --popover: #2C2C2C;
+  --popover-foreground: #FFFFFF;
+  --primary: #7B78E0;
+  --primary-foreground: #FFFFFF;
+  --secondary: #3C3C3C;
+  --secondary-foreground: #FFFFFF;
+  --muted: #3C3C3C;
+  --muted-foreground: #AAAAAA;
+  --accent: #3D3C6E;
+  --accent-foreground: #A5A3F0;
+  --destructive: #FF6B6B;
+  --border: #444444;
+  --input: #444444;
+  --ring: #7B78E0;
+  --chart-1: #7B78E0;
+  --chart-2: #7B78E0;
+  --chart-3: #7B78E0;
+  --chart-4: #7B78E0;
+  --chart-5: #7B78E0;
+  --sidebar: #2C2C2C;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #7B78E0;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #3C3C3C;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #444444;
+  --sidebar-ring: #7B78E0;
 }
 
 @layer base {
@@ -127,4 +142,99 @@
   html {
     @apply font-sans;
   }
+}
+
+/* Custom slider styling for opacity */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(to right, #6965DB var(--range-progress, 100%), #E5E5E5 var(--range-progress, 100%));
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #333333;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #333333;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Color swatch button */
+.color-swatch {
+  @apply w-7 h-7 rounded-full border-2 border-transparent transition-all duration-150 cursor-pointer;
+}
+
+.color-swatch:hover {
+  @apply scale-110;
+}
+
+.color-swatch.active {
+  @apply border-neutral-400 ring-2 ring-neutral-200;
+}
+
+/* Background swatch (square) */
+.bg-swatch {
+  @apply w-7 h-7 rounded-lg border-2 border-transparent transition-all duration-150 cursor-pointer;
+}
+
+.bg-swatch:hover {
+  @apply scale-110;
+}
+
+.bg-swatch.active {
+  @apply border-neutral-400 ring-2 ring-neutral-200;
+}
+
+/* Tool button with keyboard subscript */
+.tool-btn {
+  @apply relative p-2.5 rounded-xl transition-all duration-150 flex items-center justify-center;
+}
+
+.tool-btn:hover {
+  @apply bg-neutral-100;
+}
+
+.tool-btn.active {
+  @apply bg-[#E0DFFF] text-[#6965DB];
+}
+
+.tool-btn .subscript {
+  @apply absolute -bottom-0.5 -right-0.5 text-[8px] font-medium text-neutral-400;
+}
+
+/* Pill button */
+.pill-btn {
+  @apply px-4 py-2 rounded-full bg-white shadow-md border border-neutral-200 text-sm font-medium text-neutral-700 transition-all duration-150;
+}
+
+.pill-btn:hover {
+  @apply bg-neutral-50;
+}
+
+/* Checkerboard pattern for transparent background */
+.checkerboard {
+  background-image:
+    linear-gradient(45deg, #ccc 25%, transparent 25%),
+    linear-gradient(-45deg, #ccc 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #ccc 75%),
+    linear-gradient(-45deg, transparent 75%, #ccc 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
 }

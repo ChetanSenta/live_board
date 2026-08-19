@@ -119,6 +119,7 @@ const Connector = forwardRef<any, { shape: ShapeType; isSelected: boolean; onSel
         strokeWidth={isSelected ? 3 : shape.strokeWidth}
         lineCap="round"
         lineJoin="round"
+        opacity={shape.opacity ?? 1}
         // Add arrow head at the end
         pointerLength={10}
         pointerWidth={8}
@@ -164,6 +165,7 @@ const Shape = forwardRef<any, ShapeProps>(({ shape, isSelected, onSelect }, ref)
             strokeWidth={isSelected ? 2 : shape.strokeWidth}
             rotation={shape.rotation}
             cornerRadius={4}
+            opacity={shape.opacity ?? 1}
           />
         );
 
@@ -178,6 +180,7 @@ const Shape = forwardRef<any, ShapeProps>(({ shape, isSelected, onSelect }, ref)
             stroke={isSelected ? "#0066FF" : shape.stroke}
             strokeWidth={isSelected ? 2 : shape.strokeWidth}
             rotation={shape.rotation}
+            opacity={shape.opacity ?? 1}
           />
         );
 
@@ -193,6 +196,7 @@ const Shape = forwardRef<any, ShapeProps>(({ shape, isSelected, onSelect }, ref)
             lineCap="round"
             lineJoin="round"
             hitStrokeWidth={12}
+            opacity={shape.opacity ?? 1}
           />
         );
 
@@ -212,6 +216,7 @@ const Shape = forwardRef<any, ShapeProps>(({ shape, isSelected, onSelect }, ref)
             wrap="word"
             draggable={true}
             rotation={shape.rotation}
+            opacity={shape.opacity ?? 1}
             // Make text selectable/editable on double-click
             onDblClick={(e) => {
               e.cancelBubble = true;
@@ -239,6 +244,7 @@ const Shape = forwardRef<any, ShapeProps>(({ shape, isSelected, onSelect }, ref)
               shadowOpacity={0.2}
               shadowOffsetX={2}
               shadowOffsetY={2}
+              opacity={shape.opacity ?? 1}
             />
             {/* Sticky note text content */}
             <Text
@@ -255,6 +261,7 @@ const Shape = forwardRef<any, ShapeProps>(({ shape, isSelected, onSelect }, ref)
               wrap="word"
               draggable={false}
               rotation={0}
+              opacity={shape.opacity ?? 1}
               // Prevent text from being selected separately
               listening={false}
             />
